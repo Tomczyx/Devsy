@@ -14,7 +14,7 @@ export default function Upgrades({
 }) {
 
 
-console.log(UpgradesScale[lvl])
+
 
   const handleUpgradeClick = () => {
 

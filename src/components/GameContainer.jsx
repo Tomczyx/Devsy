@@ -4,6 +4,7 @@ import Clicker from "./Clicker";
 import Upgrades from "./Upgrades";
 import { useState } from "react";
 import Menu from "./Menu";
+import LoadingScreen from "./LoadingScreen";
 export default function GameContainer() {
   const localPointsData = localStorage.getItem("points");
   const localLvlData = localStorage.getItem('lvl');
@@ -12,6 +13,7 @@ export default function GameContainer() {
   const [points, setPoints] = useState(JSON.parse(localPointsData));
   const [addFactor, setAddFactor] = useState(initialFactor);
   const [price, setPrice] = useState(10);
+  const [LoadingScreenAction , setLoadingScreenAction] = useState(true);
 
   const [UpgradesScale, setUpgradesScale] = useState([
     {
@@ -40,10 +42,15 @@ export default function GameContainer() {
     const localDataLvl = localStorage.getItem('lvl');
     setPoints(JSON.parse(localDataPoints));
     setLvl(JSON.parse(localDataLvl));
+    setInterval(() => {
+      setLoadingScreenAction(false)
+    }, 5000);
   });
 
+
   return (
-    <div className="wrapper">
+    <div className="flex justify-center items-center h-[100vh] flex-col">
+      <LoadingScreen active={LoadingScreenAction}/>
       <Clicker
         points={points}
         setPoints={setPoints}
